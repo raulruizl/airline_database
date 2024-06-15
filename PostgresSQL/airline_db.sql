@@ -6,9 +6,46 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS public.aircraft
 (
     aircraft_id integer NOT NULL,
-    aircraft_model character varying(30) NOT NULL,
+    aircraft_model character varying(50) COLLATE pg_catalog."default" NOT NULL,
     capacity integer,
-    PRIMARY KEY (aircraft_id)
+    CONSTRAINT aircraft_pkey PRIMARY KEY (aircraft_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.airport
+(
+    airport_id serial NOT NULL,
+    city character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    country character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    iata_code character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT airport_pkey PRIMARY KEY (airport_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.booking
+(
+    book_id integer NOT NULL,
+    flight_id integer NOT NULL,
+    class_type integer NOT NULL,
+    date timestamp without time zone,
+    CONSTRAINT booking_pkey PRIMARY KEY (book_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.cabin_crew
+(
+    cabin_crew_id integer NOT NULL,
+    crew_boss character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    crew_member1 character varying(30) COLLATE pg_catalog."default",
+    crew_member2 character varying(30) COLLATE pg_catalog."default",
+    crew_member3 character varying(30) COLLATE pg_catalog."default",
+    CONSTRAINT cabin_crew_pkey PRIMARY KEY (cabin_crew_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.crew
+(
+    crew_id integer NOT NULL,
+    pilot character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    copilot character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    cabin_crew_id integer NOT NULL,
+    CONSTRAINT crew_pkey PRIMARY KEY (crew_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.flight
@@ -20,54 +57,17 @@ CREATE TABLE IF NOT EXISTS public.flight
     arrival_airport integer,
     departure_airport integer,
     crew_id integer,
-    PRIMARY KEY (flight_id)
-);
-
-CREATE TABLE IF NOT EXISTS public.airport
-(
-    airport_id integer NOT NULL,
-    city character varying(50) NOT NULL,
-    country character varying(30) NOT NULL,
-    iata_code character varying(10) NOT NULL,
-    PRIMARY KEY (airport_id)
-);
-
-CREATE TABLE IF NOT EXISTS public.crew
-(
-    crew_id integer NOT NULL,
-    pilot character varying(50) NOT NULL,
-    copilot character varying(50) NOT NULL,
-    cabin_crew_id integer NOT NULL,
-    PRIMARY KEY (crew_id)
-);
-
-CREATE TABLE IF NOT EXISTS public.cabin_crew
-(
-    cabin_crew_id integer NOT NULL,
-    crew_boss character varying(30) NOT NULL,
-    crew_member1 character varying(30),
-    crew_member2 character varying(30),
-    crew_member3 character varying(30),
-    PRIMARY KEY (cabin_crew_id)
+    CONSTRAINT flight_pkey PRIMARY KEY (flight_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.passanger
 (
     passanger_id integer NOT NULL,
-    name character varying(30) NOT NULL,
-    surnames character varying(40) NOT NULL,
-    email character varying(100),
+    name character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    surnames character varying(40) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(100) COLLATE pg_catalog."default",
     phone_number integer,
-    PRIMARY KEY (passanger_id)
-);
-
-CREATE TABLE IF NOT EXISTS public.booking
-(
-    book_id integer NOT NULL,
-    flight_id integer NOT NULL,
-    class_type integer NOT NULL,
-    date timestamp without time zone,
-    PRIMARY KEY (book_id)
+    CONSTRAINT passanger_pkey PRIMARY KEY (passanger_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.passanger_booking
@@ -76,8 +76,24 @@ CREATE TABLE IF NOT EXISTS public.passanger_booking
     booking_book_id integer NOT NULL
 );
 
+ALTER TABLE IF EXISTS public.booking
+    ADD CONSTRAINT booking_flight_id_fkey FOREIGN KEY (flight_id)
+    REFERENCES public.flight (flight_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.crew
+    ADD CONSTRAINT crew_cabin_crew_id_fkey FOREIGN KEY (cabin_crew_id)
+    REFERENCES public.cabin_crew (cabin_crew_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
 ALTER TABLE IF EXISTS public.flight
-    ADD FOREIGN KEY (aircraft_id)
+    ADD CONSTRAINT flight_aircraft_id_fkey FOREIGN KEY (aircraft_id)
     REFERENCES public.aircraft (aircraft_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -85,7 +101,7 @@ ALTER TABLE IF EXISTS public.flight
 
 
 ALTER TABLE IF EXISTS public.flight
-    ADD FOREIGN KEY (arrival_airport)
+    ADD CONSTRAINT flight_arrival_airport_fkey FOREIGN KEY (arrival_airport)
     REFERENCES public.airport (airport_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
@@ -93,48 +109,32 @@ ALTER TABLE IF EXISTS public.flight
 
 
 ALTER TABLE IF EXISTS public.flight
-    ADD FOREIGN KEY (departure_airport)
-    REFERENCES public.airport (airport_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.flight
-    ADD FOREIGN KEY (crew_id)
+    ADD CONSTRAINT flight_crew_id_fkey FOREIGN KEY (crew_id)
     REFERENCES public.crew (crew_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 
-ALTER TABLE IF EXISTS public.crew
-    ADD FOREIGN KEY (cabin_crew_id)
-    REFERENCES public.cabin_crew (cabin_crew_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.booking
-    ADD FOREIGN KEY (flight_id)
-    REFERENCES public.flight (flight_id) MATCH SIMPLE
+ALTER TABLE IF EXISTS public.flight
+    ADD CONSTRAINT flight_departure_airport_fkey FOREIGN KEY (departure_airport)
+    REFERENCES public.airport (airport_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 
 ALTER TABLE IF EXISTS public.passanger_booking
-    ADD FOREIGN KEY (passanger_passanger_id)
-    REFERENCES public.passanger (passanger_id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION
-    NOT VALID;
-
-
-ALTER TABLE IF EXISTS public.passanger_booking
-    ADD FOREIGN KEY (booking_book_id)
+    ADD CONSTRAINT passanger_booking_booking_book_id_fkey FOREIGN KEY (booking_book_id)
     REFERENCES public.booking (book_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION
+    NOT VALID;
+
+
+ALTER TABLE IF EXISTS public.passanger_booking
+    ADD CONSTRAINT passanger_booking_passanger_passanger_id_fkey FOREIGN KEY (passanger_passanger_id)
+    REFERENCES public.passanger (passanger_id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;

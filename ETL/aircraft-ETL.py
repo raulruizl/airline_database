@@ -30,11 +30,6 @@ def extract():
 
             extracted_data = pd.concat([extracted_data,extract_from_csv(csv_file)],ignore_index=True)
         
-        ## Process all json files
-        for json_file in glob.glob("*.json"):
-
-            extracted_data = pd.concat([extracted_data,extract_from_json(json_file)],ignore_index=True)
-        
 
     except Exception as e:   
         log_process(f"Error extracting data: {e}")
@@ -101,6 +96,7 @@ if __name__ == "__main__":
 
     log_process("Extract phase Started")
     extracted_data = extract()
+    print(extracted_data)
     log_process("Extract phase Ended")
 
     log_process("Transform phase Started")

@@ -77,6 +77,4 @@ if __name__ == "__main__":
 
 
     generate_df().to_csv('./Files/aircraft/aircraft.csv',index=False)
-    with open('./Files/aircraft/aircraft.json', 'w') as f:
-        f.write(generate_df().to_json(orient='records'))
     

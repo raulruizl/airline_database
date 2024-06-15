@@ -80,7 +80,7 @@ def log_process(msg):
 
     timestamp_format = '%Y-%m-%d %H:%M:%S'
     now = datetime.now().strftime(timestamp_format)
-    line = '[' + now + ']: ' + msg + '\n'
+    line = f'[{table_name} ' + now + ']: ' + msg + '\n'
 
     print(line)
     with open(log_file, "a") as f:

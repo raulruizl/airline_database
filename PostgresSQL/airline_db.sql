@@ -5,19 +5,18 @@ BEGIN;
 
 CREATE TABLE IF NOT EXISTS public.aircraft
 (
-    aircraft_id integer NOT NULL,
-    aircraft_model character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    aircraft_id character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    aircraft_model character varying(30) COLLATE pg_catalog."default" NOT NULL,
     capacity integer,
     CONSTRAINT aircraft_pkey PRIMARY KEY (aircraft_id)
 );
 
 CREATE TABLE IF NOT EXISTS public.airport
 (
-    airport_id serial NOT NULL,
     city character varying(100) COLLATE pg_catalog."default" NOT NULL,
     country character varying(60) COLLATE pg_catalog."default" NOT NULL,
-    iata_code character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT airport_pkey PRIMARY KEY (airport_id)
+    iata_code character varying(3) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT airport_pkey PRIMARY KEY (iata_code)
 );
 
 CREATE TABLE IF NOT EXISTS public.booking
@@ -51,12 +50,13 @@ CREATE TABLE IF NOT EXISTS public.crew
 CREATE TABLE IF NOT EXISTS public.flight
 (
     flight_id integer NOT NULL,
-    departure timestamp without time zone NOT NULL,
-    arrival timestamp without time zone NOT NULL,
-    aircraft_id integer NOT NULL,
-    arrival_airport integer,
-    departure_airport integer,
+    departure timestamp without time zone,
+    arrival timestamp without time zone,
+    aircraft_id character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    arrival_airport character varying(3) COLLATE pg_catalog."default" NOT NULL,
+    departure_airport character varying(3) COLLATE pg_catalog."default" NOT NULL,
     crew_id integer,
+    flight_code character varying(6) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT flight_pkey PRIMARY KEY (flight_id)
 );
 
@@ -67,6 +67,7 @@ CREATE TABLE IF NOT EXISTS public.passanger
     surnames character varying(40) COLLATE pg_catalog."default" NOT NULL,
     email character varying(100) COLLATE pg_catalog."default",
     phone_number integer,
+    id_number character varying(9) COLLATE pg_catalog."default",
     CONSTRAINT passanger_pkey PRIMARY KEY (passanger_id)
 );
 
@@ -102,7 +103,7 @@ ALTER TABLE IF EXISTS public.flight
 
 ALTER TABLE IF EXISTS public.flight
     ADD CONSTRAINT flight_arrival_airport_fkey FOREIGN KEY (arrival_airport)
-    REFERENCES public.airport (airport_id) MATCH SIMPLE
+    REFERENCES public.airport (iata_code) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
@@ -118,7 +119,7 @@ ALTER TABLE IF EXISTS public.flight
 
 ALTER TABLE IF EXISTS public.flight
     ADD CONSTRAINT flight_departure_airport_fkey FOREIGN KEY (departure_airport)
-    REFERENCES public.airport (airport_id) MATCH SIMPLE
+    REFERENCES public.airport (iata_code) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;

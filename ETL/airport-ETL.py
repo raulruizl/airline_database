@@ -15,7 +15,7 @@ data_url = 'https://www.flugzeuginfo.net/table_airportcodes_country-location_en.
 def extract():
 
     try:
-        extracted_data = pd.DataFrame(columns=["iata","location","airport",'country'])
+        extracted_data = pd.DataFrame(columns=["iata_code","location","airport",'country'])
 
         response = requests.get(data_url)
         html_content = response.text
@@ -34,13 +34,12 @@ def extract():
 
                     extracted_data = pd.concat([extracted_data, pd.DataFrame([{"iata_code":iata,"location":location, "airport":airport,'country':country}])], ignore_index = True)
 
-        extracted_data.drop_duplicates(inplace=True)   
-
+        extracted_data.drop_duplicates(subset='iata_code',inplace=True)  # Not unique IATA on data extracted
         return extracted_data
 
-    except:
+    except Exception as e:
 
-        log_process("Error extracting data")
+        log_process(f"Error extracting data: {e}")
         sys.exit(1)
     
 

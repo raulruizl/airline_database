@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: SxdixCGG0nXAbcc
+      POSTGRES_DB: airline_db
+    ports:
+      - "5430:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data:/var/lib/postgresql/data

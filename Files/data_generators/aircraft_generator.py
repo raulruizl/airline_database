@@ -37,19 +37,20 @@ def aircraft_capacity(model):
 
     return capacity_dict[model]
 
-def generate_df():
+def generate_df(db_id):
 
     df = pd.DataFrame(columns=['aircraft_id','aircraft_model','capacity'])
 
     for i in range(1,16):
 
         id = aircraft_id().upper()
+        while id in db_id:
+            id = aircraft_id().upper()
         model = aircraft_model()
         capacity = aircraft_capacity(model)
         print(f"Generating aircraft {i} of 15: Generated aircraft {id} with model {model} and capacity {capacity}")
         df = pd.concat([df,pd.DataFrame([{'aircraft_id':id,'aircraft_model':model,'capacity':capacity}])],ignore_index=True)
 
-    return df
 
 if __name__ == "__main__":
     
@@ -76,5 +77,5 @@ if __name__ == "__main__":
     conn.close()
 
 
-    generate_df().to_csv('./Files/aircraft/aircraft.csv',index=False)
+    generate_df(db_id).to_csv('./Files/aircraft/aircraft.csv',index=False)
     

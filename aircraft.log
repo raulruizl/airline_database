@@ -42,3 +42,11 @@ CONTEXT:  COPY aircraft, line 16, column aircraft_id: "{'0': 'FF322', '1': 'YJ24
 [aircraft 2024-06-15 23:11:21]: Load phase Started
 [aircraft 2024-06-15 23:11:21]: Load phase Ended
 [aircraft 2024-06-15 23:11:21]: ETL Job Ended
+[aircraft 2024-06-16 18:03:43]: ETL Job Started
+[aircraft 2024-06-16 18:03:43]: Extract phase Started
+[aircraft 2024-06-16 18:03:43]: Extract phase Ended
+[aircraft 2024-06-16 18:03:43]: Transform phase Started
+[aircraft 2024-06-16 18:03:43]: Transformed data
+[aircraft 2024-06-16 18:03:43]: Load phase Started
+[aircraft 2024-06-16 18:03:43]: Load phase Ended
+[aircraft 2024-06-16 18:03:43]: ETL Job Ended

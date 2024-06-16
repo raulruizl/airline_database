@@ -1,0 +1,8 @@
+[airport 2024-06-16 18:03:37]: ETL Job Started
+[airport 2024-06-16 18:03:37]: Extract phase Started
+[airport 2024-06-16 18:03:40]: Extract phase Ended
+[airport 2024-06-16 18:03:40]: Transform phase Started
+[airport 2024-06-16 18:03:40]: Transformed data
+[airport 2024-06-16 18:03:40]: Load phase Started
+[airport 2024-06-16 18:03:40]: Load phase Ended
+[airport 2024-06-16 18:03:40]: ETL Job Ended

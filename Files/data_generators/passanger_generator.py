@@ -19,23 +19,23 @@ def name_generator():
 
 def mail_generator(name, last_name):
 
-    mail = name + '.' + last_name + '@email.com'
+    mail = name.lower() + '.' + last_name.lower() + '@email.com'
 
     return mail
 
 
     
 def phone_generator():
-    country_codes = ['+1', '+44', '+61', '+86', '+91']
+    country_codes = ['+1 ', '+44 ', '+61 ', '+86 ', '+91 ']
     random_country_code = random.choice(country_codes)
-    random_phone = random_country_code + str(random.randint(1000000000, 9999999999))
+    random_phone = random_country_code + str(random.randint(00000000, 99999999))
     
     return random_phone
 
 
 def passanger_id():
-
-    random_dni = ''.join(random.choices(string.digits, k=8))
+    
+    random_dni = ''.join(random.choices(string.digits, k=8)) + random.choice(string.ascii_uppercase)
     return random_dni
 
 

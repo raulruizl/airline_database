@@ -1,52 +1,16 @@
-[aircraft 2024-06-15 23:06:30]: ETL Job Started
-[aircraft 2024-06-15 23:06:30]: Extract phase Started
-[aircraft 2024-06-15 23:06:30]: Extract phase Ended
-[aircraft 2024-06-15 23:06:30]: Transform phase Started
-[aircraft 2024-06-15 23:06:30]: Transformed data
-[aircraft 2024-06-15 23:06:30]: Load phase Started
-[aircraft 2024-06-15 23:06:30]: Error loading data: extra data after last expected column
-CONTEXT:  COPY aircraft, line 1: "OV5259,Boeing B737,200,,,,,,,,,,,,,,,"
-
-[aircraft 2024-06-15 23:08:43]: ETL Job Started
-[aircraft 2024-06-15 23:08:43]: Extract phase Started
-[aircraft 2024-06-15 23:08:43]: Extract phase Ended
-[aircraft 2024-06-15 23:08:43]: Transform phase Started
-[aircraft 2024-06-15 23:08:43]: Transformed data
-[aircraft 2024-06-15 23:08:43]: Load phase Started
-[aircraft 2024-06-15 23:08:43]: Error loading data: extra data after last expected column
-CONTEXT:  COPY aircraft, line 1: "QQ6746,Boeing B787,300,,,,,,,,,,,,,,,"
-
-[aircraft 2024-06-15 23:10:01]: ETL Job Started
-[aircraft 2024-06-15 23:10:01]: Extract phase Started
-[aircraft 2024-06-15 23:10:01]: Extract phase Ended
-[aircraft 2024-06-15 23:10:01]: Transform phase Started
-[aircraft 2024-06-15 23:10:01]: Transformed data
-[aircraft 2024-06-15 23:10:01]: Load phase Started
-[aircraft 2024-06-15 23:10:01]: Error loading data: extra data after last expected column
-CONTEXT:  COPY aircraft, line 1: "QQ6746,Boeing B787,300,,,,,,,,,,,,,,,"
-
-[aircraft 2024-06-15 23:10:40]: ETL Job Started
-[aircraft 2024-06-15 23:10:40]: Extract phase Started
-[aircraft 2024-06-15 23:10:40]: Extract phase Ended
-[aircraft 2024-06-15 23:10:40]: Transform phase Started
-[aircraft 2024-06-15 23:10:40]: Transformed data
-[aircraft 2024-06-15 23:10:40]: Load phase Started
-[aircraft 2024-06-15 23:10:40]: Error loading data: value too long for type character varying(10)
-CONTEXT:  COPY aircraft, line 16, column aircraft_id: "{'0': 'FF322', '1': 'YJ2420', '2': 'IX863', '3': 'HN1369', '4': 'HE8672', '5': 'MR7907', '6': 'CG910..."
-
-[aircraft 2024-06-15 23:11:21]: ETL Job Started
-[aircraft 2024-06-15 23:11:21]: Extract phase Started
-[aircraft 2024-06-15 23:11:21]: Extract phase Ended
-[aircraft 2024-06-15 23:11:21]: Transform phase Started
-[aircraft 2024-06-15 23:11:21]: Transformed data
-[aircraft 2024-06-15 23:11:21]: Load phase Started
-[aircraft 2024-06-15 23:11:21]: Load phase Ended
-[aircraft 2024-06-15 23:11:21]: ETL Job Ended
-[aircraft 2024-06-16 18:03:43]: ETL Job Started
-[aircraft 2024-06-16 18:03:43]: Extract phase Started
-[aircraft 2024-06-16 18:03:43]: Extract phase Ended
-[aircraft 2024-06-16 18:03:43]: Transform phase Started
-[aircraft 2024-06-16 18:03:43]: Transformed data
-[aircraft 2024-06-16 18:03:43]: Load phase Started
-[aircraft 2024-06-16 18:03:43]: Load phase Ended
-[aircraft 2024-06-16 18:03:43]: ETL Job Ended
+[aircraft 2024-06-16 18:35:39]: ETL Job Started
+[aircraft 2024-06-16 18:35:39]: Extract phase Started
+[aircraft 2024-06-16 18:35:39]: Extract phase Ended
+[aircraft 2024-06-16 18:35:39]: Transform phase Started
+[aircraft 2024-06-16 18:35:39]: Transformed data
+[aircraft 2024-06-16 18:35:39]: Load phase Started
+[aircraft 2024-06-16 18:35:39]: Load phase Ended
+[aircraft 2024-06-16 18:35:39]: ETL Job Ended
+[aircraft 2024-06-16 18:36:42]: ETL Job Started
+[aircraft 2024-06-16 18:36:42]: Extract phase Started
+[aircraft 2024-06-16 18:36:42]: Extract phase Ended
+[aircraft 2024-06-16 18:36:42]: Transform phase Started
+[aircraft 2024-06-16 18:36:42]: Transformed data
+[aircraft 2024-06-16 18:36:42]: Load phase Started
+[aircraft 2024-06-16 18:36:42]: Load phase Ended
+[aircraft 2024-06-16 18:36:42]: ETL Job Ended

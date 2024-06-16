@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS public.airport
 
 CREATE TABLE IF NOT EXISTS public.booking
 (
-    book_id integer NOT NULL,
+    book_id serial NOT NULL,
     flight_id integer NOT NULL,
     class_type integer NOT NULL,
     date timestamp without time zone,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS public.booking
 
 CREATE TABLE IF NOT EXISTS public.cabin_crew
 (
-    cabin_crew_id integer NOT NULL,
+    cabin_crew_id serial NOT NULL,
     crew_boss character varying(30) COLLATE pg_catalog."default" NOT NULL,
     crew_member1 character varying(30) COLLATE pg_catalog."default",
     crew_member2 character varying(30) COLLATE pg_catalog."default",
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS public.cabin_crew
 
 CREATE TABLE IF NOT EXISTS public.crew
 (
-    crew_id integer NOT NULL,
+    crew_id serial NOT NULL,
     pilot character varying(50) COLLATE pg_catalog."default" NOT NULL,
     copilot character varying(50) COLLATE pg_catalog."default" NOT NULL,
     cabin_crew_id integer NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS public.crew
 
 CREATE TABLE IF NOT EXISTS public.flight
 (
-    flight_id integer NOT NULL,
+    flight_id serial NOT NULL,
     departure timestamp without time zone,
     arrival timestamp without time zone,
     aircraft_id character varying(10) COLLATE pg_catalog."default" NOT NULL,
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS public.flight
 
 CREATE TABLE IF NOT EXISTS public.passanger
 (
-    passanger_id integer NOT NULL,
+    passanger_id serial NOT NULL,
     name character varying(30) COLLATE pg_catalog."default" NOT NULL,
     surnames character varying(40) COLLATE pg_catalog."default" NOT NULL,
     email character varying(100) COLLATE pg_catalog."default",
-    phone_number integer,
+    phone_number character varying(15),
     id_number character varying(9) COLLATE pg_catalog."default",
     CONSTRAINT passanger_pkey PRIMARY KEY (passanger_id)
 );

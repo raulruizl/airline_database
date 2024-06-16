@@ -105,8 +105,7 @@ if __name__ == "__main__":
     log_process("Transformed data")
 
     log_process("Load phase Started")
-    ### BULK LOAD EXAMPLE ###
-    #load_data(extracted_data,cur,conn) 
+    load_data(extracted_data,cur,conn) 
     log_process("Load phase Ended")
 
     log_process("ETL Job Ended")

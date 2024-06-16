@@ -27,7 +27,8 @@ def extract():
 
         ## Process all csv files
         for csv_file in glob.glob("./Files/aircraft/*.csv"):
-
+            
+            csv_file
             extracted_data = pd.concat([extracted_data,extract_from_csv(csv_file)],ignore_index=True)
         
 
@@ -104,7 +105,6 @@ if __name__ == "__main__":
     log_process("Transformed data")
 
     log_process("Load phase Started")
-    ### BULK LOAD EXAMPLE ###
     load_data(extracted_data,cur,conn) 
     log_process("Load phase Ended")
 
